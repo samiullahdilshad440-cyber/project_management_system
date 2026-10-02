@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lime: #d2ff00;
+  --color-ink: #0a0a0a;
+  --color-panel: #141414;
+  --color-line: #262626;
+  --font-display: "Anton", Impact, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+};
+
+body {
+  background: var(--color-ink);
+  color: #fff;
+  font-family: var(--font-sans);
+};
+
+@layer components {
+  .display { @apply font-display uppercase leading-[0.9] tracking-tight; }
+  .label   { @apply text-[11px] uppercase tracking-[0.2em] text-neutral-500; }
+  .input   { @apply w-full rounded-lg border border-line bg-ink px-3 py-2 text-sm outline-none focus:border-lime; }
+  .btn     { @apply rounded-full bg-lime px-5 py-2 text-sm font-bold uppercase tracking-wide text-black transition hover:brightness-110 cursor-pointer; }
+  .btn-ghost { @apply rounded-full border border-line px-4 py-1.5 text-xs uppercase tracking-wide text-neutral-300 transition hover:border-lime hover:text-lime cursor-pointer; }
+  .card    { @apply rounded-2xl border border-line bg-panel p-5 transition hover:border-lime/60; }
+}
