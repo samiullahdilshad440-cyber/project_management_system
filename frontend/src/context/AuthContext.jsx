@@ -21,13 +21,22 @@ export function AuthProvider({ children }) {
   const register = async (name, email, password) =>
     setUser((await api.post('/auth/register', { name, email, password })).data);
 
+  const loginWithGoogle = () => {
+    window.location.href = `${api.defaults.baseURL}/auth/google`;
+  };
+
   const logout = async () => {
-    await api.post('/auth/logout');
-    setUser(null);
+    try {
+      await api.post('/auth/logout');
+    } finally {
+      setUser(null); // clear local state even if the request fails
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider
+      value={{ user, loading, login, register, loginWithGoogle, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

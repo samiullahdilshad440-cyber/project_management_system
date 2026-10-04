@@ -5,6 +5,7 @@ import { protect, signToken, setAuthCookie } from '../middleware/auth.js';
 
 const router = Router();
 
+
 router.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password || password.length < 6)
@@ -39,6 +40,7 @@ router.post('/logout', (req, res) => {
 
 // ---- Google OAuth ----
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'], session: false }));
+
 
 router.get(
   '/callback/google',
