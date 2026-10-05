@@ -34,7 +34,10 @@ router.get('/me', protect, (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
-  res.clearCookie('token');
+  res.clearCookie('token', {
+       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+       secure: process.env.NODE_ENV === 'production',
+     });;
   req.session.destroy(() => res.json({ message: 'Logged out' }));
 });
 
